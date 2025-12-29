@@ -1,0 +1,176 @@
+---
+title: Integrations and Connections
+description: Learn how to connect PRATHAM RAVAL with third-party services to enhance your home care workflow.
+---
+
+## Overview
+
+PRATHAM RAVAL supports seamless integrations with popular third-party services to streamline your home care operations. Connect calendars for scheduling caregiver visits, payment gateways for billing clients, webhooks for real-time notifications, health devices for patient monitoring, and use the API for custom solutions.
+
+<Columns cols={3}>
+  <Card title="Calendar Sync" icon="calendar" href="#calendar-sync">
+    Schedule visits automatically with Google Calendar.
+  </Card>
+  <Card title="Payments" icon="credit-card" href="#payments">
+    Accept payments via Stripe or PayPal.
+  </Card>
+  <Card title="Webhooks" icon="zap" href="#webhooks">
+    Receive instant updates on care events.
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Health Devices" icon="activity" href="#devices">
+    Integrate wearables for vital signs.
+  </Card>
+  <Card title="API Access" icon="code" href="#api">
+    Build custom integrations.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Start with calendar sync for immediate workflow improvements. Ensure you have admin access to your PRATHAM RAVAL dashboard at `https://dashboard.example.com`.
+</Callout>
+
+## Sync with Google Calendar
+
+Set up two-way sync to manage caregiver schedules effortlessly.
+
+<Steps>
+  <Step title="Enable Integration" icon="settings">
+    Navigate to Integrations in your dashboard. Select Google Calendar and authorize with your account.
+  </Step>
+  <Step title="Map Events" icon="map">
+    Create rules to map care visits to calendar events. Use patient names in titles for easy recognition.
+  </Step>
+  <Step title="Test Sync">
+````bash
+# Verify sync by creating a test visit
+curl -X POST https://api.example.com/visits \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{"patientId": "123", "start": "2024-10-20T10:00:00Z"}'
+````
+    Check your calendar for the new event.
+  </Step>
+</Steps>
+
+## Payment Gateways
+
+Integrate secure payments for home care services.
+
+<Tabs>
+  <Tab title="Stripe" icon="dollar-sign">
+    <CodeGroup tabs="Node.js,Python">
+````javascript
+const stripe = require('stripe')('sk_test_YOUR_STRIPE_KEY');
+const paymentIntent = await stripe.paymentIntents.create({
+  amount: 5000, // $50.00
+  currency: 'usd',
+  metadata: { visitId: 'visit-456' }
+});
+````
+````python
+import stripe
+stripe.api_key = 'sk_test_YOUR_STRIPE_KEY'
+payment_intent = stripe.PaymentIntent.create(
+  amount=5000,  # $50.00
+  currency='usd',
+  metadata={'visitId': 'visit-456'}
+)
+````
+    </CodeGroup>
+  </Tab>
+  <Tab title="PayPal" icon="paypal">
+    Use PayPal's API for invoicing.
+  </Tab>
+</Tabs>
+
+## Webhooks for Notifications
+
+Set up webhooks to trigger actions on events like visit completions.
+
+<CodeGroup tabs="Dashboard Setup,cURL">
+````javascript
+// Example webhook payload handler
+app.post('/webhook', (req, res) => {
+  const event = req.body;
+  if (event.type === 'visit.completed') {
+    // Notify caregiver via Slack
+    console.log(`Visit ${event.data.visitId} finished`);
+  }
+  res.status(200).send('OK');
+});
+````
+````bash
+# Register webhook in dashboard
+curl -X POST https://api.example.com/webhooks \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{"url": "https://your-webhook-url.com/home-care", "events": ["visit.completed"]}'
+````
+</CodeGroup>
+
+## Health Monitoring Devices
+
+<Expandable title="Connect Wearables like Fitbit" default-open="true">
+  Pair devices via OAuth to pull vitals into patient records.
+  
+  ```mermaid
+  sequenceDiagram
+      Client->>PRATHAM RAVAL: Authorize Device
+      PRATHAM RAVAL->>Fitbit: Fetch Vitals
+      Fitbit->>PRATHAM RAVAL: Heart Rate Data
+      PRATHAM RAVAL->>Client: Update Record
+  ```
+
+  Monitor thresholds with alerts.
+</Expandable>
+
+## Advanced API Integrations
+
+Access full API for custom workflows.
+
+<ParamField path="visitId" param-type="string" required="true">
+  Unique visit identifier.
+</ParamField>
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Use `Bearer YOUR_API_KEY`.
+</ParamField>
+
+<Request tabs="Create Visit,Get Visits">
+````javascript
+const response = await fetch('https://api.example.com/visits', {
+  method: 'POST',
+  headers: { 'Authorization': 'Bearer YOUR_API_KEY', 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    patientId: '123',
+    caregiverId: '456',
+    startTime: '2024-10-20T10:00:00Z'
+  })
+});
+````
+````javascript
+const visits = await fetch('https://api.example.com/visits?patientId=123', {
+  headers: { 'Authorization': 'Bearer YOUR_API_KEY' }
+});
+````
+</Request>
+
+<Response tabs="200,400">
+````json
+{
+  "id": "visit-789",
+  "status": "scheduled",
+  "patient": { "name": "John Doe" }
+}
+````
+````json
+{
+  "error": "Invalid patientId"
+}
+````
+</Response>
+
+<Callout kind="info">
+  Review API rate limits: `<1000` requests per hour. Upgrade for higher tiers.
+</Callout>

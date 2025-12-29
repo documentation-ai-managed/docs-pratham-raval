@@ -1,0 +1,144 @@
+---
+title: Changelog
+description: Track the latest updates and improvements to PRATHAM RAVAL, ensuring you stay informed on new features and fixes.
+---
+
+## What's New in PRATHAM RAVAL
+
+PRATHAM RAVAL delivers home care solutions with the latest enhancements in caregiver scheduling, patient monitoring, and service management. You review this changelog to understand recent releases, new capabilities, bug resolutions, and any breaking changes. Check back regularly for updates that improve your home care workflows.
+
+<Callout kind="info">
+  Subscribe to our RSS feed or join the community Discord for instant notifications on new releases.
+</Callout>
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Added real-time caregiver location tracking using geolocation APIs.
+- Introduced patient vital monitoring integration with wearable devices.
+- New dashboard widget for upcoming appointment summaries.
+
+## Bug Fixes
+
+- Fixed scheduling conflicts that caused overlapping caregiver shifts.
+- Resolved mobile app crashes during offline mode sync.
+- Corrected notification delays for urgent care requests.
+
+## Improvements
+
+- Enhanced search functionality for patient records with fuzzy matching.
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Voice-activated scheduling via integrated speech-to-text.
+- Multi-language support for caregiver-patient communications.
+- Automated billing export to PDF for insurance claims.
+
+## Improvements
+
+- Optimized performance for loading large patient histories (`<30%` faster).
+- Better accessibility with screen reader optimizations.
+
+## Bug Fixes
+
+- Patched security vulnerability in session token handling.
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["breaking", "feature"]}>
+
+## Initial Release
+
+- Core home care dashboard with patient and caregiver management.
+- Appointment scheduling and reminder system.
+- Basic reporting for service hours and outcomes.
+
+## Breaking Changes
+
+- Updated API authentication to use JWT tokens instead of API keys. Migrate your integrations accordingly.
+
+</Update>
+
+## Upcoming Roadmap
+
+Discover what's next for PRATHAM RAVAL. These milestones focus on AI-driven insights and expanded integrations.
+
+<Columns cols={2}>
+  <Card title="Q4 2024" icon="zap" horizontal>
+    AI-powered care plan recommendations and telehealth video calls.
+  </Card>
+  <Card title="Q1 2025" icon="trending-up">
+    Family portal for remote monitoring and EHR integrations.
+  </Card>
+</Columns>
+
+<Expandable title="Detailed Roadmap" default-open="false">
+
+| Milestone | Features | Timeline |
+|-----------|----------|----------|
+| AI Insights | Predictive health alerts | December 2024 |
+| Integrations | Epic & Cerner EHR | January 2025 |
+| Mobile Expansion | Offline-first app | February 2025 |
+
+</Expandable>
+
+## Upgrade Instructions
+
+Follow these steps to upgrade PRATHAM RAVAL smoothly. Test in staging before production.
+
+<Steps>
+  <Step title="Backup Data" icon="database">
+    Export your patient and scheduling data.
+  </Step>
+  <Step title="Update Package" icon="download">
+    
+````bash
+npm install pratham-raval@latest
+````
+
+  </Step>
+  <Step title="Migrate Config" icon="settings">
+
+    <Tabs>
+      <Tab title="v1.0 to v1.1" icon="arrow-right">
+        Update your config to use the new JWT endpoints.
+        
+````javascript
+// Old
+const auth = { apiKey: 'YOUR_API_KEY' };
+
+// New
+const auth = { 
+  token: 'YOUR_JWT_TOKEN',
+  endpoint: 'https://api.example.com/auth/v2'
+};
+````
+      </Tab>
+      <Tab title="v1.1 to v1.2" icon="check-circle">
+        Enable geolocation in settings.
+        
+````json
+{
+  "features": {
+    "geotracking": true,
+    "wearables": "fitbit"
+  }
+}
+````
+      </Tab>
+    </Tabs>
+
+  </Step>
+  <Step title="Verify" icon="shield">
+    Run tests and check caregiver dashboard.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  For breaking changes in v1.0.0, review the [migration guide](/changelog#upgrade-instructions).
+</Callout>

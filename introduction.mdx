@@ -1,0 +1,121 @@
+---
+title: Introduction to PRATHAM RAVAL
+description: Discover PRATHAM RAVAL, your comprehensive home care solution designed to simplify managing household services and support.
+---
+
+## Overview
+
+PRATHAM RAVAL transforms home care management by connecting users with trusted caregivers, scheduling services, and tracking progress in one intuitive platform. You streamline household support, from cleaning to medical assistance, with real-time updates and secure payments. Our mission focuses on empowering families and caregivers through reliable, accessible home care solutions. The vision emphasizes a future where every home receives personalized, on-demand support effortlessly.
+
+## Key Features
+
+PRATHAM RAVAL offers powerful tools tailored for modern home care needs.
+
+<Columns cols={3}>
+  <Card title="Service Scheduling" icon="calendar" href="#quick-start">
+    Book caregivers for cleaning, cooking, or elderly care with one tap. Set recurring appointments and receive instant confirmations.
+  </Card>
+  <Card title="Real-time Tracking" icon="map-pin" href="/quickstart">
+    Monitor caregiver arrival, task progress, and completion via live updates and notifications.
+  </Card>
+  <Card title="Secure Payments" icon="credit-card" href="/authentication">
+    Handle payments seamlessly with integrated gateways. Track invoices and ratings post-service.
+  </Card>
+</Columns>
+
+## Benefits
+
+Experience tailored advantages depending on your role.
+
+<Tabs>
+  <Tab title="For Users" icon="users">
+    Save time managing household tasks. Access verified caregivers, customize schedules, and enjoy transparent pricing. Receive detailed reports on service quality to build trust.
+  </Tab>
+  <Tab title="For Caregivers" icon="user-check">
+    Find flexible gigs near you. Manage your schedule, update availability, and receive payments promptly. Build your profile with reviews to attract more clients.
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Start by creating your account to explore personalized recommendations based on your location and needs.
+</Callout>
+
+## Quick Start
+
+Get up and running in minutes.
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Visit `https://dashboard.example.com` and register with your email.
+  </Step>
+  <Step title="Browse Services" icon="search">
+    Search for caregivers by service type, like cleaning or nursing.
+  </Step>
+  <Step title="Book Your First Service">
+````bash
+# Example API call to book a service
+curl -X POST https://api.example.com/v1/bookings \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -d '{
+    "service": "cleaning",
+    "date": "2024-10-20",
+    "duration": 2
+  }'
+````
+  </Step>
+  <Step title="Track and Rate" icon="check-circle">
+    Follow progress in the dashboard and leave feedback after completion.
+  </Step>
+</Steps>
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+// Fetch available services
+const response = await fetch('https://api.example.com/v1/services', {
+  headers: { 'Authorization': `Bearer ${YOUR_TOKEN}` }
+});
+const services = await response.json();
+console.log(services);
+```
+```python
+import requests
+response = requests.get('https://api.example.com/v1/services',
+                       headers={'Authorization': f'Bearer {YOUR_TOKEN}'})
+services = response.json()
+print(services)
+```
+</CodeGroup>
+
+## Next Steps
+
+<Columns cols={2}>
+  <Card title="Quickstart Guide" icon="book-open" href="/quickstart">
+    Dive into detailed setup and first booking.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/authentication">
+    Secure your account with API keys and tokens.
+  </Card>
+</Columns>
+
+## Brand Guidelines
+
+<Expandable title="Using PRATHAM RAVAL Brand Colors" default-open="false">
+
+Follow these guidelines to maintain brand consistency.
+
+- **Primary Color:** `#3B82F6` (use for buttons, links, and accents)
+- **Usage:** Apply to CTAs and headers for a professional blue tone evoking trust.
+
+```css
+/* Example CSS usage */
+.primary-button {
+  background-color: #3B82F6;
+  color: white;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+```
+
+Avoid altering the hex value. Test accessibility with white text for contrast ratios `{>4.5:1}`.
+
+</Expandable>
